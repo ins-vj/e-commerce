@@ -92,7 +92,7 @@ export default function BrandReview() {
           {testimonialImages.map((images, index) => (
             <div key={index} className="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
               <Image
-                src={images[activeSlide[index]]}
+                src='/images/A24FAT20303F4OS_BLUE.webp'
                 alt={`Customer style ${index + 1}`}
                 width={300}
                 height={400}

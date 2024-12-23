@@ -1,10 +1,10 @@
-'use client'
+'use client';
 import { useState } from 'react';
 
 const categories = [
-  { name: 'Books', href: '#' },
-  { name: 'Gift-Boxes', href: '#' },
-  { name: 'Stationery', href: '#' },
+  { name: 'Books', href: '/category/books' },
+  { name: 'Gift-Boxes', href: '/category/gift-boxes' },
+  { name: 'Stationery', href: '/category/stationery' },
 ];
 
 export function Navbar() {
@@ -16,7 +16,7 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-4 flex h-[7rem] items-center justify-between">
         {/* Logo and Brand Name */}
         <div className="flex items-center space-x-3">
-          <a href="/" className="flex items-center">
+          <a href="/home2/" className="flex items-center">
             <img
               src="/images/Mytalorzone_Logo_Transparent-ai-brush-removebg-x7snkn2s.png"
               alt="MyTailorZone"

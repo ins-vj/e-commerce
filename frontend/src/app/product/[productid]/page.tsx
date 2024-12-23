@@ -42,7 +42,7 @@ const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> })
   const handleAddToCart = () => {
     if (productData) {
       addItem({
-        id: productData.id,
+        productId: productData.id,  // Changed from 'id' to 'productId'
         name: productData.name,
         price: productData.price,
         quantity,
@@ -51,7 +51,7 @@ const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> })
       });
       
       setQuantity(1);
-      router.push('/cart'); // Navigate to cart page after adding item
+      router.push('/cart');
     }
   };
 

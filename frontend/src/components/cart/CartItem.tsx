@@ -3,18 +3,18 @@ import { Trash2 } from 'lucide-react';
 import QuantitySelector from '../QuantitySelector';
 
 interface CartItemProps {
-  id: string;
+  productId: string; // Changed from id to productId to match store
   name: string;
   price: number;
   quantity: number;
   img: string;
   category: string;
-  onUpdateQuantity: (id: string, quantity: number) => void;
-  onRemove: (id: string) => void;
+  onUpdateQuantity: (productId: string, quantity: number) => void;
+  onRemove: (productId: string) => void;
 }
 
 const CartItem: React.FC<CartItemProps> = ({
-  id,
+  productId, // Changed from id to productId
   name,
   price,
   quantity,
@@ -47,10 +47,10 @@ const CartItem: React.FC<CartItemProps> = ({
         <div className="mt-4 flex items-center justify-between">
           <QuantitySelector
             quantity={quantity}
-            onQuantityChange={(newQuantity) => onUpdateQuantity(id, newQuantity)}
+            onQuantityChange={(newQuantity) => onUpdateQuantity(productId, newQuantity)}
           />
           <button
-            onClick={() => onRemove(id)}
+            onClick={() => onRemove(productId)}
             className="text-red-600 hover:text-red-700 flex items-center gap-1"
           >
             <Trash2 className="w-4 h-4" />
@@ -61,4 +61,5 @@ const CartItem: React.FC<CartItemProps> = ({
     </div>
   );
 };
- export default CartItem;
+
+export default CartItem;

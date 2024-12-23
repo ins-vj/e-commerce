@@ -62,7 +62,7 @@ const Page = () => {
 />
       <div
         style={{ backgroundColor: '#FFC1CC' }}
-        className="hero-section h-[85vh] flex justify-between"
+        className="hero-section h-[85vh] flex justify-between overflow-clip"
       >
         <div className="img3 h-full w-[45vw]">
           <img

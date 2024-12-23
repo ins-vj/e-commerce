@@ -1,18 +1,36 @@
-import Navcompomonent from '@/components/navbar'
-import Productinfo from '@/components/productcard';
-import React from 'react'
+import React from 'react';
+import CategoryClient from './CategoryClient';
+import Navbar from '@/components/navbar';
+import BrandReview from '@/components/brandreview';
+import Footer from '@/components/footer';
 
-const Category_search_result =async ({params}:{params:{categoryname:string}}) => {
-    const {categoryname}=params;
-    
-    // const data=await fetch(`https://api.example.com/category/${categoryname}`)
-  return (
-    <div>
-        <Navcompomonent/>
-       <div>{categoryname}</div>
-    <Productinfo/>
-    </div>
-  )
+async function fetchProducts(categoryname: string) {
+  const response = await fetch('http://localhost:5000/product/category', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ category: categoryname }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch products');
+  }
+
+  const data = await response.json();
+  return data.products || [];
 }
 
-export default Category_search_result
+const CategoryPage = async ({ params }: { params: { categoryname: string } }) => {
+  const { categoryname } = params;
+  const products = await fetchProducts(categoryname);
+
+  return (
+    <div>
+      <Navbar />
+      <CategoryClient categoryname={categoryname} initialProducts={products} />
+      <BrandReview />
+      <Footer />
+    </div>
+  );
+};
+
+export default CategoryPage;
