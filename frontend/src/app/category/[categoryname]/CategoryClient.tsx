@@ -7,8 +7,10 @@ import Productinfogpt from '@/components/productinfogpt';
 interface Product {
   _id: string;
   name: string;
-  // Add other product properties
+  img: string; // URL or path to the image
+  price: number; // Price of the product
 }
+
 
 const CategoryClient = ({
   categoryname,
