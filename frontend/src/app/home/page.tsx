@@ -4,7 +4,6 @@ import Footer from '@/components/footer'
 import Navcompomonent from '@/components/navbar'
 import Productinfo from '@/components/productcard'
 import Productinfogpt from '@/components/productinfogpt'
-import { Http2ServerRequest } from 'http2'
 import React from 'react'
 
 const handleProductClick=async(productid:string)=>{
@@ -78,6 +77,7 @@ const page = async() => {
       <div className="img3 h-full"><img src="/images/pic3.png" alt="" className='h-full object-cover relative top-10 '/></div>
 </div>
       </div>
+      <Productinfo/>
       <div className="featured-category h-[80vh] bg-blue-800 ">category 1</div>
       <div className="products-grid grid grid-cols-[repeat(auto-fill,_minmax(25vw,_1fr))] gap-[4vw] p-2">
   {firstproducts.map((firstproduct) => (

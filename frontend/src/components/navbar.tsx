@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const categories = [
   { name: 'Books', href: '/category/books' },
@@ -16,13 +17,13 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-4 flex h-[7rem] items-center justify-between">
         {/* Logo and Brand Name */}
         <div className="flex items-center space-x-3">
-          <a href="/home2/" className="flex items-center">
+          <Link href="/home2/" className="flex items-center">
             <img
               src="/images/Mytalorzone_Logo_Transparent-ai-brush-removebg-x7snkn2s.png"
               alt="MyTailorZone"
               className="h-16 w-auto"
             />
-          </a>
+          </Link>
           <div className="flex flex-col">
             <span className="text-xl font-bold text-gray-900">Mytalorzone</span>
             <span className="text-sm text-gray-600">By Sahiba</span>
@@ -43,13 +44,13 @@ export function Navbar() {
               <div className="absolute top-full mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div className="py-1">
                   {categories.map((category) => (
-                    <a
+                    <Link
                       key={category.name}
                       href={category.href}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       {category.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -93,27 +94,27 @@ export function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
-            <a href="/" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">
+            <Link href="/" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">
               Home
-            </a>
+            </Link>
             {categories.map((category) => (
-              <a
+              <Link
                 key={category.name}
                 href={category.href}
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md"
               >
                 {category.name}
-              </a>
+              </Link>
             ))}
-            <a href="#" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">
+            <Link href="#" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">
               Search
-            </a>
-            <a href="#" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">
+            </Link>
+            <Link href="#" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">
               Cart
-            </a>
-            <a href="#" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">
+            </Link>
+            <Link href="#" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">
               Account
-            </a>
+            </Link>
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import Productinfogpt from '@/components/productinfogpt';
 
@@ -17,7 +17,6 @@ const CategoryClient = ({
   categoryname: string;
   initialProducts: Product[];
 }) => {
-  const [firstProducts, setFirstProducts] = useState<Product[]>(initialProducts);
   const router = useRouter();
 
   const handleProductClick = (productId: string) => {
@@ -26,18 +25,17 @@ const CategoryClient = ({
 
   return (
     <div className="container mx-auto">
-        
       <div className="text-center text-[3rem] border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         {categoryname}
       </div>
       <div className="products-grid grid grid-cols-[repeat(auto-fill,_minmax(25vw,_1fr))] gap-[4vw] p-2">
-        {firstProducts.map((firstProduct) => (
+        {initialProducts.map((product) => (
           <div
-            key={firstProduct._id}
-            onClick={() => handleProductClick(firstProduct._id)}
+            key={product._id}
+            onClick={() => handleProductClick(product._id)}
             className="cursor-pointer"
           >
-            <Productinfogpt product={firstProduct} />
+            <Productinfogpt product={product} />
           </div>
         ))}
       </div>

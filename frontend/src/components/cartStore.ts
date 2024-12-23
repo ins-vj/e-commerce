@@ -18,44 +18,36 @@ interface CartStore {
   loadCart: () => void;
 }
 
-export const useCartStore = create<CartStore>((set, get) => ({
+export const useCartStore = create<CartStore>((set) => ({
   items: [],
 
   addItem: (newItem) =>
     set((state) => {
-      // Create a copy of the current items
       const currentItems = [...state.items];
-      
-      // Find if the item already exists
       const existingItemIndex = currentItems.findIndex(
-        item => item.productId === newItem.productId
+        (item) => item.productId === newItem.productId
       );
 
       if (existingItemIndex !== -1) {
-        // Update existing item quantity
         currentItems[existingItemIndex] = {
           ...currentItems[existingItemIndex],
-          quantity: currentItems[existingItemIndex].quantity + newItem.quantity
+          quantity: currentItems[existingItemIndex].quantity + newItem.quantity,
         };
       } else {
-        // Add new item
         currentItems.push({
           ...newItem,
-          quantity: newItem.quantity || 1  // Ensure quantity is at least 1
+          quantity: newItem.quantity || 1, // Ensure quantity is at least 1
         });
       }
 
-      // Save to localStorage
       localStorage.setItem('cart', JSON.stringify(currentItems));
-      
-      // Return new state
       return { items: currentItems };
     }),
 
   removeItem: (productId) =>
     set((state) => {
       const updatedItems = state.items.filter(
-        item => item.productId !== productId
+        (item) => item.productId !== productId
       );
       localStorage.setItem('cart', JSON.stringify(updatedItems));
       return { items: updatedItems };
@@ -63,10 +55,8 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
   updateQuantity: (productId, quantity) =>
     set((state) => {
-      const updatedItems = state.items.map(item =>
-        item.productId === productId
-          ? { ...item, quantity }
-          : item
+      const updatedItems = state.items.map((item) =>
+        item.productId === productId ? { ...item, quantity } : item
       );
       localStorage.setItem('cart', JSON.stringify(updatedItems));
       return { items: updatedItems };
@@ -83,10 +73,10 @@ export const useCartStore = create<CartStore>((set, get) => ({
 // Hook with automatic persistence
 export const useCartStoreWithPersistence = () => {
   const store = useCartStore();
-  
+
   useEffect(() => {
     store.loadCart();
   }, []);
-  
+
   return store;
 };
