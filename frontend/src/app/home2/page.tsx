@@ -11,7 +11,8 @@ import { Bell } from 'lucide-react';
 
 interface Product {
   _id: string;
-  [key: string]: any; // For additional properties
+  [key: string]: string | number | boolean | object | null; // Adjust based on expected types
+
 }
 
 const Page = () => {
