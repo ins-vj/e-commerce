@@ -31,7 +31,10 @@ const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> })
   React.useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://e-commerce-2gts.onrender.com/product/${productid}`, {
+        // Ensure productid is a string
+        const id = String(productid); 
+
+        const response = await fetch(`https://e-commerce-2gts.onrender.com/product/${id}`, {
           next: { revalidate: 10 },
         });
 
