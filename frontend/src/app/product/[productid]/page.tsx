@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCartStore } from '@/components/cartStore';
 import QuantitySelector from '@/components/QuantitySelector';
 import Brandreview from '@/components/brandreview';
@@ -21,14 +21,14 @@ interface ProductData {
   visibility?: string;
 }
 
-const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> }) => {
+const DetailedProduct = ({ params }: { params: { productid: string } }) => {
+  const { productid } = params;
   const router = useRouter();
-  const { productid } = React.use(params);
-  const [quantity, setQuantity] = React.useState(1);
+  const [quantity, setQuantity] = useState(1);
   const addItem = useCartStore((state) => state.addItem);
-  const [productData, setProductData] = React.useState<ProductData | null>(null);
+  const [productData, setProductData] = useState<ProductData | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(`https://e-commerce-2gts.onrender.com/product/${productid}`, {
@@ -42,6 +42,8 @@ const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> })
         const data = await response.json();
         if (data.success) {
           setProductData(data.product);
+        } else {
+          console.warn('Product data fetch was unsuccessful.');
         }
       } catch (error) {
         console.error('Error fetching product data:', error);
@@ -61,7 +63,6 @@ const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> })
         img: productData.img,
         category: productData.category,
       });
-
       setQuantity(1);
       router.push('/cart');
     }

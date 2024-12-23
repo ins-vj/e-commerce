@@ -7,7 +7,9 @@ import Productinfogpt from '@/components/productinfogpt';
 interface Product {
   _id: string;
   name: string;
-  // Add other product properties
+  img: string; // Add this
+  price: string; // Add this
+  imgAlt?: string; // Optional property for alternative image
 }
 
 const CategoryClient = ({
