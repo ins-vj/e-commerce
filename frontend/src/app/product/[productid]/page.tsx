@@ -1,5 +1,5 @@
-'use client'
-import React, { use } from 'react';
+'use client';
+import React from 'react';
 import { useCartStore } from '@/components/cartStore';
 import QuantitySelector from '@/components/QuantitySelector';
 import Brandreview from '@/components/brandreview';
@@ -9,12 +9,24 @@ import Navcompomonent from '@/components/navbar';
 import { ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
+interface ProductData {
+  name: string;
+  price: string;
+  img: string;
+  category: string;
+  rating: number;
+  productId: string;
+  inStockValue: number;
+  soldStockValue: number;
+  visibility?: string;
+}
+
 const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> }) => {
   const router = useRouter();
-  const { productid } = use(params);
+  const { productid } = React.use(params);
   const [quantity, setQuantity] = React.useState(1);
   const addItem = useCartStore((state) => state.addItem);
-  const [productData, setProductData] = React.useState<any>(null);
+  const [productData, setProductData] = React.useState<ProductData | null>(null);
 
   React.useEffect(() => {
     const fetchProduct = async () => {
@@ -42,23 +54,21 @@ const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> })
   const handleAddToCart = () => {
     if (productData) {
       addItem({
-        productId: productData.id,  // Changed from 'id' to 'productId'
+        productId: productData.productId,
         name: productData.name,
-        price: productData.price,
+        price: parseFloat(productData.price),
         quantity,
         img: productData.img,
         category: productData.category,
       });
-      
+
       setQuantity(1);
       router.push('/cart');
     }
   };
 
-
-
   return (
-    <div className='bg-gray-200'>
+    <div className="bg-gray-200">
       <Navcompomonent />
       {productData ? (
         <div className="product-detail w-[90vw] mx-auto py-10">
@@ -112,7 +122,7 @@ const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> })
                   </div>
                 </div>
                 <p className="text-sm text-gray-500">
-                  Stock Status: 
+                  Stock Status:
                   <span className={`ml-2 ${productData.inStockValue ? 'text-green-600' : 'text-red-600'}`}>
                     {productData.inStockValue ? 'In Stock' : 'Out of Stock'}
                   </span>
@@ -122,10 +132,7 @@ const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> })
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <label className="text-gray-700 font-medium">Quantity:</label>
-                  <QuantitySelector
-                    quantity={quantity}
-                    onQuantityChange={setQuantity}
-                  />
+                  <QuantitySelector quantity={quantity} onQuantityChange={setQuantity} />
                 </div>
 
                 <button
@@ -140,9 +147,7 @@ const DetailedProduct = ({ params }: { params: Promise<{ productid: string }> })
 
               <div className="border-t pt-6">
                 <h3 className="font-semibold text-gray-900 mb-2">Product Details</h3>
-                <p className="text-gray-600">
-                  Sold items: {productData.soldStockValue}
-                </p>
+                <p className="text-gray-600">Sold items: {productData.soldStockValue}</p>
               </div>
             </div>
           </div>
