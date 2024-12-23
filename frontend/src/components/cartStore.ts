@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { useEffect } from 'react';
+
+const isBrowser = typeof window !== 'undefined';
 
 interface CartItem {
   productId: string;
@@ -40,7 +41,10 @@ export const useCartStore = create<CartStore>((set) => ({
         });
       }
 
-      localStorage.setItem('cart', JSON.stringify(currentItems));
+      if (isBrowser) {
+        localStorage.setItem('cart', JSON.stringify(currentItems));
+      }
+
       return { items: currentItems };
     }),
 
@@ -49,7 +53,11 @@ export const useCartStore = create<CartStore>((set) => ({
       const updatedItems = state.items.filter(
         (item) => item.productId !== productId
       );
-      localStorage.setItem('cart', JSON.stringify(updatedItems));
+
+      if (isBrowser) {
+        localStorage.setItem('cart', JSON.stringify(updatedItems));
+      }
+
       return { items: updatedItems };
     }),
 
@@ -58,25 +66,21 @@ export const useCartStore = create<CartStore>((set) => ({
       const updatedItems = state.items.map((item) =>
         item.productId === productId ? { ...item, quantity } : item
       );
-      localStorage.setItem('cart', JSON.stringify(updatedItems));
+
+      if (isBrowser) {
+        localStorage.setItem('cart', JSON.stringify(updatedItems));
+      }
+
       return { items: updatedItems };
     }),
 
   loadCart: () =>
     set(() => {
-      const storedCart = localStorage.getItem('cart');
-      const items = storedCart ? JSON.parse(storedCart) : [];
-      return { items };
+      if (isBrowser) {
+        const storedCart = localStorage.getItem('cart');
+        const items = storedCart ? JSON.parse(storedCart) : [];
+        return { items };
+      }
+      return { items: [] };
     }),
 }));
-
-// Hook with automatic persistence
-export const useCartStoreWithPersistence = () => {
-  const store = useCartStore();
-
-  useEffect(() => {
-    store.loadCart();
-  }, []);
-
-  return store;
-};

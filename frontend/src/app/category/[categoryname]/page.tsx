@@ -5,7 +5,7 @@ import BrandReview from '@/components/brandreview';
 import Footer from '@/components/footer';
 
 async function fetchProducts(categoryname: string) {
-  const response = await fetch('https://e-commerce-2gts.onrender.com/product/category', {
+  const response = await fetch(`https://e-commerce-2gts.onrender.com/product/${category}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ category: categoryname }),

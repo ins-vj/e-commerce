@@ -10,9 +10,15 @@ import { NotificationBanner } from '@/components/NotificationBanner/Notification
 import { Bell } from 'lucide-react';
 
 interface Product {
-  _id: string;
-  [key: string]: string | number | boolean | object | null; // Adjust based on expected types
-
+  name: string;
+  price: string;
+  img: string;
+  category: string;
+  rating: number;
+  productId: string;
+  inStockValue: number;
+  soldStockValue: number;
+  visibility?: string;
 }
 
 const Page = () => {
@@ -108,8 +114,8 @@ const Page = () => {
         <div className="products-grid grid grid-cols-[repeat(auto-fill,_minmax(25vw,_1fr))] gap-[4vw] p-2">
           {firstProducts.map((firstProduct) => (
             <div
-              key={firstProduct._id}
-              onClick={() => handleProductClick(firstProduct._id, router)}
+              key={firstProduct.productId}
+              onClick={() => handleProductClick(firstProduct.productId, router)}
               className="cursor-pointer"
             >
               <Productinfogpt product={firstProduct} />
@@ -122,8 +128,8 @@ const Page = () => {
         <div className="products-grid grid grid-cols-[repeat(auto-fill,_minmax(25vw,_1fr))] gap-[4vw] p-2">
           {secondProducts.map((secondProduct) => (
             <div
-              key={secondProduct._id}
-              onClick={() => handleProductClick(secondProduct._id, router)}
+              key={secondProduct.productId}
+              onClick={() => handleProductClick(secondProduct.productId, router)}
               className="cursor-pointer"
             >
               <Productinfogpt product={secondProduct} />
