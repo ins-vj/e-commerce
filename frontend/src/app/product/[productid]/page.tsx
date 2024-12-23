@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { useCartStore } from '@/components/cartStore';
 import QuantitySelector from '@/components/QuantitySelector';
@@ -21,8 +22,8 @@ interface ProductData {
   visibility?: string;
 }
 
-const DetailedProduct = ({ params }: { params: { productid: string } }) => {
-  const { productid } = params; // Destructure productid from params
+const DetailedProduct = async ({ params }: { params: { productid: string } }) => {
+  const { productid } = params; // Extract productid from params
   const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const addItem = useCartStore((state) => state.addItem);
