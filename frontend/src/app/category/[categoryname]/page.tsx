@@ -19,7 +19,13 @@ async function fetchProducts(categoryname: string) {
   return data.products || [];
 }
 
-const CategoryPage = async ({ params }: { params: { categoryname: string } }) => {
+interface CategoryPageProps {
+  params: {
+    categoryname: string;
+  };
+}
+
+const CategoryPage = async ({ params }: CategoryPageProps) => {
   const { categoryname } = params;
   const products = await fetchProducts(categoryname);
 
