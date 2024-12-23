@@ -22,7 +22,7 @@ interface ProductData {
 }
 
 const DetailedProduct = ({ params }: { params: { productid: string } }) => {
-  const { productid } = params;
+  const { productid } = params; // Destructure productid from params
   const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const addItem = useCartStore((state) => state.addItem);
@@ -31,10 +31,7 @@ const DetailedProduct = ({ params }: { params: { productid: string } }) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        // Ensure productid is a string
-        const id = String(productid); 
-
-        const response = await fetch(`https://e-commerce-2gts.onrender.com/product/${id}`, {
+        const response = await fetch(`https://e-commerce-2gts.onrender.com/product/${productid}`, {
           next: { revalidate: 10 },
         });
 
