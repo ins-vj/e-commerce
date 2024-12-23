@@ -9,7 +9,7 @@ import React from 'react'
 
 const handleProductClick=async(productid:string)=>{
   try {
-    const response3=await fetch(`http://localhost:5000/product/${productid}`);
+    const response3=await fetch(`https://e-commerce-2gts.onrender.com/product/${productid}`);
     if (!response3.ok) {
       throw new Error("Failed to fetch product data");
     }
@@ -26,7 +26,7 @@ const page = async() => {
   let firstproducts = [];
   let secondproducts=[];
   try {
-    const response = await fetch('http://localhost:5000/product/category', {
+    const response = await fetch('https://e-commerce-2gts.onrender.com/product/category', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const page = async() => {
     }
 
 
-    const response2 = await fetch('http://localhost:5000/product/category', {
+    const response2 = await fetch('https://e-commerce-2gts.onrender.com/product/category', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

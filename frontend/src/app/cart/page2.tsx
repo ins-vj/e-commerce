@@ -9,7 +9,7 @@ const DetailedProduct = async ({ params }: { params: { productid: string } }) =>
   let productData: any = null;
 
   try {
-    const response = await fetch(`http://localhost:5000/product/${productid}`, {
+    const response = await fetch(`https://e-commerce-2gts.onrender.com/product/${productid}`, {
       next: { revalidate: 10 },
     });
 

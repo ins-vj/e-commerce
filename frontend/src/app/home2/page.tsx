@@ -19,7 +19,7 @@ const Page = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response1 = await fetch('http://localhost:5000/product/category', {
+        const response1 = await fetch('https://e-commerce-2gts.onrender.com/product/category', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ category: 'books' }),
@@ -29,7 +29,7 @@ const Page = () => {
           setFirstProducts(data1.products);
         }
 
-        const response2 = await fetch('http://localhost:5000/product/category', {
+        const response2 = await fetch('https://e-commerce-2gts.onrender.com/product/category', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ category: 'stationery' }),

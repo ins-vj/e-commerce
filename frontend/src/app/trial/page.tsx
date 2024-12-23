@@ -7,7 +7,7 @@ import Productinfogpt from '@/components/productinfogpt';
 const Page = async () => {
   let products = [];
   try {
-    const response = await fetch('http://localhost:5000/product/category', {
+    const response = await fetch('https://e-commerce-2gts.onrender.com/product/category', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
