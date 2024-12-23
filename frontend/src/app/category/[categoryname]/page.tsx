@@ -20,13 +20,14 @@ async function fetchProducts(categoryname: string) {
 }
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     categoryname: string;
-  };
+  }>;
 }
 
 const CategoryPage = async ({ params }: CategoryPageProps) => {
-  const { categoryname } = params;
+  const resolvedParams = await params; // Resolve the Promise
+  const { categoryname } = resolvedParams;
   const products = await fetchProducts(categoryname);
 
   return (
