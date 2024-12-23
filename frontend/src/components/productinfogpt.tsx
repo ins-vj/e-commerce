@@ -1,13 +1,27 @@
 import React from 'react';
 import { Info, ShoppingCart } from 'lucide-react';
 
-// Define the Product type
+// // Define the Product type
+// interface Product {
+//   img: string;
+//   imgAlt?: string; // Optional alternative image
+//   name: string;
+//   price: string; // Price as a string (e.g., "₹5000")
+// }
+
 interface Product {
+  name: string;
+  price: string;
   img: string;
   imgAlt?: string; // Optional alternative image
-  name: string;
-  price: string; // Price as a string (e.g., "₹5000")
+  category: string;
+  rating: number;
+  productId: string;
+  inStockValue: number;
+  soldStockValue: number;
+  visibility?: string;
 }
+
 
 interface ProductInfoProps {
   product: Product;

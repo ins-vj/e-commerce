@@ -5,10 +5,15 @@ import { useRouter } from 'next/navigation';
 import Productinfogpt from '@/components/productinfogpt';
 
 interface Product {
-  _id: string;
   name: string;
-  img: string; // URL or path to the image
-  price: number; // Price of the product
+  price: string;
+  img: string;
+  category: string;
+  rating: number;
+  productId: string;
+  inStockValue: number;
+  soldStockValue: number;
+  visibility?: string;
 }
 
 
@@ -33,8 +38,8 @@ const CategoryClient = ({
       <div className="products-grid grid grid-cols-[repeat(auto-fill,_minmax(25vw,_1fr))] gap-[4vw] p-2">
         {initialProducts.map((product) => (
           <div
-            key={product._id}
-            onClick={() => handleProductClick(product._id)}
+            key={product.productId}
+            onClick={() => handleProductClick(product.productId)}
             className="cursor-pointer"
           >
             <Productinfogpt product={product} />
