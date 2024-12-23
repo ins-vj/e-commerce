@@ -1,7 +1,19 @@
 import React from 'react';
 import { Info, ShoppingCart } from 'lucide-react';
 
-const Productinfogpt = ({ product }) => {
+// Define the Product type
+interface Product {
+  img: string;
+  imgAlt?: string; // Optional alternative image
+  name: string;
+  price: string; // Price as a string (e.g., "₹5000")
+}
+
+interface ProductInfoProps {
+  product: Product;
+}
+
+const Productinfogpt: React.FC<ProductInfoProps> = ({ product }) => {
   return (
     <div className="bg-white rounded-lg shadow-xl h-[90vh] w-[30vw] overflow-hidden p-3 my-2">
       <div className="productimg group relative h-full w-full">
